@@ -23,8 +23,6 @@ export class AppComponent implements OnInit, AfterViewInit{
     ngOnInit(): void {
       console.log('----------------');
       this.title = 'ssfda';
-      console.log(this.title);
-      console.log(this.router.url);
     }
 
     ngAfterViewInit(): void {
@@ -35,7 +33,6 @@ export class AppComponent implements OnInit, AfterViewInit{
       );
       console.log('----------------');
       console.log(this.router.url);
-      
     }
 
 }
