@@ -1,0 +1,320 @@
+
+    <h2 id="environment-variables" style="position: relative;" class="css-jehsw0">Environment variables</h2>
+    <p class="css-kgl18x">node-postgres uses the same <a
+            href="https://www.postgresql.org/docs/9.1/static/libpq-envars.html" target="_blank">environment
+            variables</a> as libpq to connect to a PostgreSQL server. Both individual clients &amp; pools will use these
+        environment variables. Here's a tiny program connecting node.js to the PostgreSQL server:
+    </p>
+
+    <div class="prism-code language-javascript css-1pvw5s9"
+        style="color: rgb(156, 220, 254); background-color: rgb(30, 30, 30);">
+            <div class="token-line">
+                <span class="token keyword" style="color: rgb(86, 156, 214);">const</span><span class="token plain"> </span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '{' }}</span><span class="token plain"> </span><span class="token maybe-class-name">Pool</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"> </span><span class="token maybe-class-name">Client</span><span class="token plain"> </span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '}' }}</span><span class="token plain"> </span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token plain"> </span><span class="token function" style="color: rgb(220, 220, 170);">require</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token string" style="color: rgb(206, 145, 120);">'pg'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+            </div>
+            <div class="token-line">
+                <span class="token plain" style="display: inline-block;"></span>
+            </div>
+            <div class="token-line">
+                <span class="token plain"></span><span class="token comment" style="color: rgb(106, 153, 85);">// pools will use environment variables</span><span class="token plain"></span>
+            </div>
+            <div class="token-line">
+                <span class="token plain"></span><span class="token comment" style="color: rgb(106, 153, 85);">// for connection information</span><span class="token plain"></span>
+            </div>
+            <div class="token-line">
+                <span class="token plain"></span><span class="token keyword" style="color: rgb(86, 156, 214);">const</span><span class="token plain"> pool </span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token plain"> </span><span class="token keyword" style="color: rgb(86, 156, 214);">new</span><span class="token plain"> </span><span class="token class-name" style="color: rgb(78, 201, 176);">Pool</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+            </div>
+            <div class="token-line">
+                <span class="token plain" style="display: inline-block;"></span>
+            </div>
+            <div class="token-line">
+                <span class="token plain">pool</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token method function property-access" style="color: rgb(220, 220, 170);">query</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token string" style="color: rgb(206, 145, 120);">'SELECT NOW()'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"> </span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token parameter">err</span><span class="token parameter punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token parameter"> res</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"> </span><span class="token arrow operator" style="color: rgb(212, 212, 212);">=&gt;</span><span class="token plain"> </span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '{' }}</span><span class="token plain"></span>
+            </div>
+            <div class="token-line">
+                <span class="token plain">  </span><span class="token console class-name" style="color: rgb(78, 201, 176);">console</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token method function property-access" style="color: rgb(220, 220, 170);">log</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token plain">err</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"> res</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+            </div>
+            <div class="token-line">
+                <span class="token plain">  pool</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token method function property-access" style="color: rgb(220, 220, 170);">end</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+            </div>
+                <div class="token-line">
+                    <span class="token plain"></span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '}' }}</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain" style="display: inline-block;"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain"></span><span class="token comment" style="color: rgb(106, 153, 85);">// you can also use async/await</span><span class="token plain"></span>
+            </div>
+             <div class="token-line">
+                    <span class="token plain"></span><span class="token keyword" style="color: rgb(86, 156, 214);">const</span><span class="token plain"> res </span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token plain"> </span><span class="token keyword" style="color: rgb(86, 156, 214);">await</span><span class="token plain"> pool</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token method function property-access" style="color: rgb(220, 220, 170);">query</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token string" style="color: rgb(206, 145, 120);">'SELECT NOW()'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+                </div>
+                <div class="token-line"><span class="token plain"></span><span class="token keyword" style="color: rgb(86, 156, 214);">await</span><span class="token plain"> pool</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token method function property-access" style="color: rgb(220, 220, 170);">end</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain" style="display: inline-block;"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain"></span><span class="token comment" style="color: rgb(106, 153, 85);">// clients will also use environment variables</span><span class="token plain"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain"></span><span class="token comment" style="color: rgb(106, 153, 85);">// for connection information</span><span class="token plain"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain"></span><span class="token keyword" style="color: rgb(86, 156, 214);">const</span><span class="token plain"> client </span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token plain"> </span><span class="token keyword" style="color: rgb(86, 156, 214);">new</span><span class="token plain"> </span><span class="token class-name" style="color: rgb(78, 201, 176);">Client</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain"></span><span class="token keyword" style="color: rgb(86, 156, 214);">await</span><span class="token plain"> client</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token method function property-access" style="color: rgb(220, 220, 170);">connect</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain" style="display: inline-block;"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain"></span><span class="token keyword" style="color: rgb(86, 156, 214);">const</span><span class="token plain"> res </span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token plain"> </span><span class="token keyword" style="color: rgb(86, 156, 214);">await</span><span class="token plain"> client</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token method function property-access" style="color: rgb(220, 220, 170);">query</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token string" style="color: rgb(206, 145, 120);">'SELECT NOW()'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain"></span><span class="token keyword" style="color: rgb(86, 156, 214);">await</span><span class="token plain"> client</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token method function property-access" style="color: rgb(220, 220, 170);">end</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+                </div>
+            </div>
+
+    <p class="css-kgl18x">To run the above program and specify which database to connect to we can invoke it like so:
+    </p>
+
+    <div class="prism-code language-javascript css-1pvw5s9" style="color: rgb(156, 220, 254); background-color: rgb(30, 30, 30);">
+        <div class="token-line">
+                <span class="token plain">$ </span><span class="token constant" style="color: rgb(100, 102, 149);">PGUSER</span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token plain">dbuser \</span>
+        </div>
+        <div class="token-line">
+            <span class="token plain">  </span><span class="token constant" style="color: rgb(100, 102, 149);">PGHOST</span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token plain">database</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token property-access">server</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token property-access">com</span><span class="token plain"> \</span>
+        </div>
+        <div class="token-line">
+            <span class="token plain">  </span><span class="token constant" style="color: rgb(100, 102, 149);">PGPASSWORD</span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token plain">secretpassword \</span>
+        </div>
+        <div class="token-line">
+            <span class="token plain">  </span><span class="token constant" style="color: rgb(100, 102, 149);">PGDATABASE</span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token plain">mydb \</span>
+        </div>
+        <div class="token-line">           
+            <span class="token plain">  node script</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token property-access">js</span><span class="token plain"></span>
+        </div>    
+    </div>
+
+    <p class="css-kgl18x">
+        This allows us to write our programs without having to specify connection information in the
+        program and lets us reuse them to connect to different databases without having to modify the code.
+    </p>
+    <p class="css-kgl18x">
+        The default values for the environment variables used are:
+    </p>
+
+    <div class="prism-code language-javascript css-1pvw5s9"
+        style="color: rgb(156, 220, 254); background-color: rgb(30, 30, 30);">
+            <div class="token-line">
+                <span class="token constant" style="color: rgb(100, 102, 149);">PGHOST</span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token string" style="color: rgb(206, 145, 120);">'localhost'</span><span class="token plain"></span>
+        </div>
+        <div class="token-line">
+            <span class="token plain"></span><span class="token constant" style="color: rgb(100, 102, 149);">PGUSER</span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token plain">process</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token property-access">env</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token constant" style="color: rgb(100, 102, 149);">USER</span><span class="token plain"></span>
+        </div>
+        <div class="token-line">
+            <span class="token plain"></span><span class="token constant" style="color: rgb(100, 102, 149);">PGDATABASE</span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token plain">process</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token property-access">env</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token constant" style="color: rgb(100, 102, 149);">USER</span><span class="token plain"></span>
+        </div>
+        <div class="token-line">
+            <span class="token plain"></span><span class="token constant" style="color: rgb(100, 102, 149);">PGPASSWORD</span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token keyword null nil" style="color: rgb(86, 156, 214);">null</span><span class="token plain"></span></div><div class="token-line"><span class="token plain"></span><span class="token constant" style="color: rgb(100, 102, 149);">PGPORT</span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token number" style="color: rgb(181, 206, 168);">5432</span><span class="token plain"></span>
+        </div>
+    </div>
+
+    <h2 id="programmatic" style="position: relative;" class="css-jehsw0">Programmatic</h2>
+    <p class="css-kgl18x">node-postgres also supports configuring a pool or client programmatically with connection
+        information. Here's our same script from above modified to use programmatic (hard-coded in this case) values.
+        This can be useful if your application already has a way to manage config values or you don't want to use
+        environment variables.
+    </p>
+
+    <div class="prism-code language-javascript css-1pvw5s9"
+        style="color: rgb(156, 220, 254); background-color: rgb(30, 30, 30);">
+            <div class="token-line">
+                <span class="token keyword" style="color: rgb(86, 156, 214);">const</span><span class="token plain"> </span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '{' }}</span><span class="token plain"> </span><span class="token maybe-class-name">Pool</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"> </span><span class="token maybe-class-name">Client</span><span class="token plain"> </span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '}' }}</span><span class="token plain"> </span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token plain"> </span><span class="token function" style="color: rgb(220, 220, 170);">require</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token string" style="color: rgb(206, 145, 120);">'pg'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+        </div>
+        <div class="token-line">
+            <span class="token plain" style="display: inline-block;"></span>
+        </div>
+        <div class="token-line">
+            <span class="token plain"></span><span class="token keyword" style="color: rgb(86, 156, 214);">const</span><span class="token plain"> pool </span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token plain"> </span><span class="token keyword" style="color: rgb(86, 156, 214);">new</span><span class="token plain"> </span><span class="token class-name" style="color: rgb(78, 201, 176);">Pool</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '{' }}</span><span class="token plain"></span>
+        </div>
+        <div class="token-line">
+            <span class="token plain">  user</span><span class="token punctuation" style="color: rgb(212, 212, 212);">:</span><span class="token plain"> </span><span class="token string" style="color: rgb(206, 145, 120);">'dbuser'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"></span>
+        </div>
+        <div class="token-line">
+            <span class="token plain">  host</span><span class="token punctuation" style="color: rgb(212, 212, 212);">:</span><span class="token plain"> </span><span class="token string" style="color: rgb(206, 145, 120);">'database.server.com'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"></span>
+        </div>
+        <div class="token-line">
+            <span class="token plain">  database</span><span class="token punctuation" style="color: rgb(212, 212, 212);">:</span><span class="token plain"> </span><span class="token string" style="color: rgb(206, 145, 120);">'mydb'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"></span>
+        </div>
+        <div class="token-line">
+            <span class="token plain">  password</span><span class="token punctuation" style="color: rgb(212, 212, 212);">:</span><span class="token plain"> </span><span class="token string" style="color: rgb(206, 145, 120);">'secretpassword'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"></span>
+        </div>
+        <div class="token-line">
+            <span class="token plain">  port</span><span class="token punctuation" style="color: rgb(212, 212, 212);">:</span><span class="token plain"> </span><span class="token number" style="color: rgb(181, 206, 168);">3211</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"></span>
+            </div>
+            <div class="token-line">
+                <span class="token plain"></span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '}' }}</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+            </div>
+            <div class="token-line">
+                <span class="token plain" style="display: inline-block;"></span>
+            </div>
+            <div class="token-line">
+                <span class="token plain">pool</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token method function property-access" style="color: rgb(220, 220, 170);">query</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token string" style="color: rgb(206, 145, 120);">'SELECT NOW()'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"> </span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token parameter">err</span><span class="token parameter punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token parameter"> res</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"> </span><span class="token arrow operator" style="color: rgb(212, 212, 212);">=&gt;</span><span class="token plain"> </span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '{' }}</span><span class="token plain"></span>
+            </div>
+            <div class="token-line">
+                <span class="token plain">  </span><span class="token console class-name" style="color: rgb(78, 201, 176);">console</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token method function property-access" style="color: rgb(220, 220, 170);">log</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token plain">err</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"> res</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+            </div>
+            <div class="token-line">
+                <span class="token plain">  pool</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token method function property-access" style="color: rgb(220, 220, 170);">end</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+            </div>
+            <div class="token-line">
+                <span class="token plain"></span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '}' }}</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+            </div>
+            <div class="token-line">
+                    <span class="token plain" style="display: inline-block;"></span>
+                </div>
+            <div class="token-line">
+                    <span class="token plain"></span><span class="token keyword" style="color: rgb(86, 156, 214);">const</span><span class="token plain"> client </span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token plain"> </span><span class="token keyword" style="color: rgb(86, 156, 214);">new</span><span class="token plain"> </span><span class="token class-name" style="color: rgb(78, 201, 176);">Client</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '{' }}</span><span class="token plain"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain">  user</span><span class="token punctuation" style="color: rgb(212, 212, 212);">:</span><span class="token plain"> </span><span class="token string" style="color: rgb(206, 145, 120);">'dbuser'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain">  host</span><span class="token punctuation" style="color: rgb(212, 212, 212);">:</span><span class="token plain"> </span><span class="token string" style="color: rgb(206, 145, 120);">'database.server.com'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain">  database</span><span class="token punctuation" style="color: rgb(212, 212, 212);">:</span><span class="token plain"> </span><span class="token string" style="color: rgb(206, 145, 120);">'mydb'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain">  password</span><span class="token punctuation" style="color: rgb(212, 212, 212);">:</span><span class="token plain"> </span><span class="token string" style="color: rgb(206, 145, 120);">'secretpassword'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain">  port</span><span class="token punctuation" style="color: rgb(212, 212, 212);">:</span><span class="token plain"> </span><span class="token number" style="color: rgb(181, 206, 168);">3211</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain"></span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '}' }}</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain">client</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token method function property-access" style="color: rgb(220, 220, 170);">connect</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain" style="display: inline-block;"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain">client</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token method function property-access" style="color: rgb(220, 220, 170);">query</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token string" style="color: rgb(206, 145, 120);">'SELECT NOW()'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"> </span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token parameter">err</span><span class="token parameter punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token parameter"> res</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"> </span><span class="token arrow operator" style="color: rgb(212, 212, 212);">=&gt;</span><span class="token plain"> </span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '{' }}</span><span class="token plain"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain">  </span><span class="token console class-name" style="color: rgb(78, 201, 176);">console</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token method function property-access" style="color: rgb(220, 220, 170);">log</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token plain">err</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"> res</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span></div><div class="token-line"><span class="token plain">  client</span><span class="token punctuation" style="color: rgb(212, 212, 212);">.</span><span class="token method function property-access" style="color: rgb(220, 220, 170);">end</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+                </div>
+                <div class="token-line">
+                    <span class="token plain"></span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '}' }}</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token plain"></span>
+                </div>
+            </div>
+
+    <h3 id="programmatic-connection-to-sockets" style="position: relative;" class="css-hf8i38">Programmatic Connection
+        to Sockets</h3>
+    <p class="css-kgl18x">Connections to unix sockets can also be made. This can be useful on distros like Ubuntu, where
+        authentication is managed via the socket connection instead of a password.
+    </p>
+
+    <div class="prism-code language-javascript css-1pvw5s9"
+        style="color: rgb(156, 220, 254); background-color: rgb(30, 30, 30);">
+        <div class="token-line">
+            <span class="token keyword" style="color: rgb(86, 156, 214);">const</span><span class="token plain"> </span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '{' }}</span><span class="token plain"> </span><span class="token maybe-class-name">Client</span><span class="token plain"> </span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '}' }}</span><span class="token plain"> </span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token plain"> </span><span class="token function" style="color: rgb(220, 220, 170);">require</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token string" style="color: rgb(206, 145, 120);">'pg'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token punctuation" style="color: rgb(212, 212, 212);">;</span><span class="token plain"></span>
+        </div>
+        <div class="token-line">
+            <span class="token plain">client </span><span class="token operator" style="color: rgb(212, 212, 212);">=</span><span class="token plain"> </span><span class="token keyword" style="color: rgb(86, 156, 214);">new</span><span class="token plain"> </span><span class="token class-name" style="color: rgb(78, 201, 176);">Client</span><span class="token punctuation" style="color: rgb(212, 212, 212);">(</span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '{' }}</span><span class="token plain"></span>
+        </div>
+        <div class="token-line">
+            <span class="token plain">    host</span><span class="token punctuation" style="color: rgb(212, 212, 212);">:</span><span class="token plain"> </span><span class="token string" style="color: rgb(206, 145, 120);">'/cloudsql/myproject:zone:mydb'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"></span>
+        </div>
+        <div class="token-line">
+            <span class="token plain">    user</span><span class="token punctuation" style="color: rgb(212, 212, 212);">:</span><span class="token plain"> </span><span class="token string" style="color: rgb(206, 145, 120);">'username'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"></span>
+        </div>
+        <div class="token-line">
+            <span class="token plain">    password</span><span class="token punctuation" style="color: rgb(212, 212, 212);">:</span><span class="token plain"> </span><span class="token string" style="color: rgb(206, 145, 120);">'password'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"></span>
+        </div>
+        <div class="token-line">
+            <span class="token plain">    database</span><span class="token punctuation" style="color: rgb(212, 212, 212);">:</span><span class="token plain"> </span><span class="token string" style="color: rgb(206, 145, 120);">'database_name'</span><span class="token punctuation" style="color: rgb(212, 212, 212);">,</span><span class="token plain"></span>
+        </div>
+        <div class="token-line">
+            <span class="token plain"></span><span class="token punctuation" style="color: rgb(212, 212, 212);">{{ '}' }}</span><span class="token punctuation" style="color: rgb(212, 212, 212);">)</span><span class="token punctuation" style="color: rgb(212, 212, 212);">;</span><span class="token plain"></span>
+        </div>
+    </div>
+
+    <h2 id="connection-uri" style="position: relative;" class="css-jehsw0">Connection URI</h2>
+    <p class="css-kgl18x">You can initialize both a pool and a client with a connection string URI as well. This is
+        common in environments like Heroku where the database connection string is supplied to your application dyno
+        through an environment variable. Connection string parsing brought to you by 
+        <a href="https://github.com/iceddev/pg-connection-string" target="_blank">pg-connection-string</a>.
+    </p>
+
+    <div class="  " style="color: rgb(156, 220, 254); background-color: rgb(30, 30, 30);">
+      <p>const {{'{'}} Pool, Client } = require('pg')</p>
+      <p>const connectionString = 'postgresql://dbuser:secretpassword@database.server.com:3211/mydb'</p>
+      <p>const pool = new Pool({{'{'}}</p>
+
+      <p>connectionString,</p>
+
+     <p>{{'}'}})</p>
+    <p>pool.query('SELECT NOW()', (err, res) => {{'{'}}</p>
+    <p> console.log(err, res)</p>
+    <p> pool.end()</p>
+    <p> {{'}'}})</p>
+    
+    <p> const client = new Client({{'{'}} </p>
+    <p> connectionString,</p>
+    <p> {{'}'}})</p>
+    <p> client.connect()</p>
+    <p> client.query('SELECT NOW()', (err, res) => {{'{'}}</p>
+    <p> console.log(err, res) </p>
+    <p> client.end()</p>
+    <p> {{'}'}})</p>
+    </div>
+
+
+
+
+    <div class="nextPreviousWrapper">
+        <a class="previousBtn" href="/announcements">
+            <div class="leftArrow">
+                <svg preserveAspectRatio="xMidYMid meet" height="1em" width="1em" fill="none"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" stroke="currentColor" class="_13gjrqj">
+                    <g>
+                        <line x1="19" y1="12" x2="5" y2="12"></line>
+                        <polyline points="12 19 5 12 12 5"></polyline>
+                    </g>
+                </svg>
+            </div>
+            <div class="preRightWrapper">
+                <div class="smallContent">
+                    <span>Previous</span>
+                </div>
+                <div class="nextPreviousTitle">
+                    <span>Announcements</span>
+                </div>
+            </div>
+        </a>
+        <a class="nextBtn" href="/features/queries">
+            <div class="nextRightWrapper">
+                <div class="smallContent">
+                    <span>Next</span>
+                </div>
+                <div class="nextPreviousTitle">
+                    <span>Queries</span>
+                </div>
+            </div>
+            <div class="rightArrow">
+                <svg preserveAspectRatio="xMidYMid meet" height="1em" width="1em" fill="none"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" stroke="currentColor" class="_13gjrqj">
+                    <g>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </g>
+                </svg>
+            </div>
+        </a>
+    </div>

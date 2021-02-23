@@ -1,4 +1,4 @@
-import { Component, OnInit , AfterViewInit} from '@angular/core';
+import { Component, OnInit , DoCheck} from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -9,7 +9,7 @@ import { Router, ActivatedRoute} from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, AfterViewInit{
+export class AppComponent implements OnInit, DoCheck{
   public title = 'Home';
 
   constructor(private breakpointObserver: BreakpointObserver, private activatedRoute: ActivatedRoute, private router: Router) {}
@@ -20,19 +20,12 @@ export class AppComponent implements OnInit, AfterViewInit{
       shareReplay()
     );
 
-    ngOnInit(): void {
-      console.log('----------------');
-      this.title = 'ssfda';
-    }
+  ngOnInit(): void {
+  }
 
-    ngAfterViewInit(): void {
-      console.log('----------------');
-      this.activatedRoute.data.subscribe(
-        res => console.log( res ),
-        err => console.error('Observer got an error: ' + err)
-      );
-      console.log('----------------');
-      console.log(this.router.url);
-    }
+  ngDoCheck(): void {
+     this.title = this.router.url.split('/')[this.router.url.split('/').length - 1].toUpperCase(); // 临时解决 title显示问题
+     if (this.title === '') {this.title = 'Welcome' ; }
+  }
 
 }

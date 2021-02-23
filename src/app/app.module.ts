@@ -13,13 +13,15 @@ import { MatListModule } from '@angular/material/list';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
 import { FeaturesComponent } from './features/features.component';
+import { ConnectingComponent } from './connecting/connecting.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
     AnnouncementsComponent,
-    FeaturesComponent
+    FeaturesComponent,
+    ConnectingComponent
   ],
   imports: [
     BrowserModule,
