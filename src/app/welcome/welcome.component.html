@@ -1,51 +1,96 @@
-<p>welcome works!</p>
-<h1 class="mat-h1">Welcome</h1>
-<h2 class="mat-h2">Github logo Edit on GitHub</h2>
+<div>
+  <p>node-postgres is a collection of node.js modules for interfacing with your PostgreSQL database. It has support for
+    callbacks, promises, async/await, connection pooling, prepared statements, cursors, streaming results, C/C++
+    bindings,
+    rich type parsing, and more! Just like PostgreSQL itself there are a lot of features: this documentation aims to get
+    you up and running quickly and in the right direction. It also tries to provide guides for more advanced & edge-case
+    topics allowing you to tap into the full power of PostgreSQL from node.js.
+  </p>
+  <p>node-postgres 是 node.js 中的一个专为PostgreSQL数据库提供接口的经典模块, 它支持回调、promises、async/await、连接池、预指令、信标、流式结果、C/C++
+    绑定、富类型语法等功能！就像 PostgreSQL 自带的很多特性；此文档的目标是为了让你在正确的方向上快速上手。并让你在 nodejs 上使用 PostgreSQL 的高级特性和边界话题上提供指导.
+  </p>
 
-<p>node-postgres is a collection of node.js modules for interfacing with your PostgreSQL database. It has support for callbacks, promises, async/await, connection pooling, prepared statements, cursors, streaming results, C/C++ bindings, rich type parsing, and more! Just like PostgreSQL itself there are a lot of features: this documentation aims to get you up and running quickly and in the right direction. It also tries to provide guides for more advanced & edge-case topics allowing you to tap into the full power of PostgreSQL from node.js.
-Install
-</p>
+  <h2>Install 安装</h2>
+  <code>$ npm install pg</code>
 
-<code>$ npm install pg</code>
+  <h2>Supporters 支持</h2>
 
-<h3>Supporters</h3>
+  <p>node-postgres continued development and support is made possible by the many supporters with a special thanks to
+    our
+    featured supporters:
+    crate.io
+    eaze.com
+  </p>
 
-<p>node-postgres continued development and support is made possible by the many supporters with a special thanks to our featured supporters:
-crate.io
-eaze.com
+  <p>在大家的共同努力下，node-postgres 得到了持续的发展和支持，特别感谢以下开发成员：</p>
+  <ul>
+    <li>crate.io</li>
+    <li>eaze.com</li>
+  </ul>
 
-If you or your company would like to sponsor node-postgres stop by github sponsors and sign up or feel free to email me if you want to add your logo to the documentation or discuss higher tiers of sponsorship!
-Version compatibility
+  <p>If you or your company would like to sponsor node-postgres stop by github sponsors and sign up or feel free to
+    email
+    me if you want to add your logo to the documentation or discuss higher tiers of sponsorship!</p>
+  <p>如果你或你的公司想赞助 node-postgres，请登陆 github 进行赞助，如果你想在文档中添加你的徽或商讨更高级的赞助，请发 email 给我。</p>
+  
+  <h2>Version compatibility 版本兼容</h2>
+  <p>
+    node-postgres strives to be compatible with all recent lts versions of node & the most recent "stable" version. At
+    the
+    time of this writing node-postgres is compatible with node 8.x, 10.x, 12.x and 14.x To use node >= 14.x you will
+    need
+    to install pg@8.2.x or later due to some internal stream changes on the node 14 branch. Dropping support for an old
+    node lts version will always be considered a breaking change in node-postgres and will be done on major version
+    number
+    changes only, and we will try to keep support for 8.x for as long as reasonably possible.
+    Getting started
+  </p>
+  <p>
+    node-postgres 至力于兼容所有的 node lts 最新版和最新的 "稳定" 版。编写本文时已兼容 node 8.x, 10.x, 12.x 和 14.x 版本。因为 node14+ 版本中一些内部流程的变更，使用
+    >= 14.x 版本的 node，你需要安装 <code>pg@8.2.x</code> 或更新的版本。
+    放弃对 node lts 旧版的支持, node-postgres 视之为重大的改变，并且只会在大版本作出变更，我们会尽可能保持对 8.X 版提供长期支持。
+  </p>
 
-node-postgres strives to be compatible with all recent lts versions of node & the most recent "stable" version. At the time of this writing node-postgres is compatible with node 8.x, 10.x, 12.x and 14.x To use node >= 14.x you will need to install pg@8.2.x or later due to some internal stream changes on the node 14 branch. Dropping support for an old node lts version will always be considered a breaking change in node-postgres and will be done on major version number changes only, and we will try to keep support for 8.x for as long as reasonably possible.
-Getting started
+  <h2>Getting started 入门</h2>
+  <p>
+    This is the simplest possible way to connect, query, and disconnect with async/await:
+  </p>
+  <p>
+    使用 async/await 是实现连接、查询和断开数据库的最简单的方法：
+  </p>
+  <div>
+    <p>const {{'{'}} Client {{'}'}} = require('pg')</p>
+    <p>const client = new Client()</p>
+    <p>await client.connect()</p>
+    <p>const res = await client.query('SELECT $1::text as message', ['Hello world!'])</p>
+    <p>console.log(res.rows[0].message) // Hello world!</p>
+    <p>await client.end()</p>
+  </div>
+  <p>
+    And here's the same thing with callbacks:
+  </p>
+  <p>
+    下面使用回调做相同的工作：
+  </p>
 
-This is the simplest possible way to connect, query, and disconnect with async/await:
-</p>
-<code>
-const  {{ '{' }} Client {{ '}' }} = require('pg')
-const client = new Client()
-await client.connect()
-const res = await client.query('SELECT $1::text as message', ['Hello world!'])
-console.log(res.rows[0].message) // Hello world!
-await client.end()
-</code>
-<p>
-And here's the same thing with callbacks:
-</p>
-<code>
-    const  {{ '{' }} Client {{ '}' }} = require('pg')
-    const client = new Client()
-    client.connect()
-    client.query('SELECT $1::text as message', ['Hello world!'], (err, res) =>  {{ '{' }} 
-      console.log(err ? err.stack : res.rows[0].message) // Hello World!
-      client.end()
-      {{ '}' }} )
-</code>
-<p>
-Our real-world apps are almost always more complicated than that, and I urge you to read on!
-Next
-Announcements
-made withby@briancarlson
+  <div>
+    <p>const {{ '{' }} Client {{ '}' }} = require('pg')</p>
+    <p>const client = new Client()</p>
+    <p>client.connect()</p>
+    <p>client.query('SELECT $1::text as message', ['Hello world!'], (err, res) => {{ '{' }} </p>
+    <p>console.log(err ? err.stack : res.rows[0].message) // Hello World!</p>
+    <p>client.end()</p>
+    <p>{{'}'}} )</p>
+  </div>
 
-</p>
+  <p>Our real-world apps are almost always more complicated than that, and I urge you to read on!</p>
+
+  <p>做正式项目时往往更复杂, 强烈建议你往下看!</p>
+
+  <p>
+    Next
+    Announcements
+    made withby@briancarlson
+  </p>
+
+</div>
