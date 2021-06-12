@@ -14,6 +14,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
 import { FeaturesComponent } from './features/features.component';
 import { ConnectingComponent } from './connecting/connecting.component';
+import { ThemePicker, ThemePickerModule } from './share/theme-picker';
+import { StyleManager } from './share/style-manager';
 
 @NgModule({
   declarations: [
@@ -32,9 +34,10 @@ import { ConnectingComponent } from './connecting/connecting.component';
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    ThemePickerModule
   ],
-  providers: [],
+  providers: [StyleManager],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
