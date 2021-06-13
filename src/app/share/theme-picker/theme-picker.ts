@@ -18,6 +18,7 @@ import {Subscription} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {DomSanitizer} from '@angular/platform-browser';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'theme-picker',
@@ -117,6 +118,7 @@ export class ThemePicker implements OnInit, OnDestroy {
 @NgModule({
   imports: [
     CommonModule,
+    HttpClientModule,
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
