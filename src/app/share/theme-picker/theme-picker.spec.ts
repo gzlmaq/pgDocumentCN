@@ -17,6 +17,7 @@ describe('ThemePicker', () => {
     spyOn(component.styleManager, 'setStyle');
     component.selectTheme(name);
     expect(component.styleManager.setStyle).toHaveBeenCalled();
-    expect(component.styleManager.setStyle).toHaveBeenCalledWith('theme', `assets/${name}.css`);
+    //expect(component.styleManager.setStyle).toHaveBeenCalledWith('theme', `assets/${name}.css`);
+    expect(component.styleManager.setStyle).toHaveBeenCalledWith('theme', `${name}.css`);
   });
 });

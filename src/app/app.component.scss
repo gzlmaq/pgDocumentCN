@@ -1,28 +1,70 @@
-
-
-.sidenav-container {
-  height: 100%;
-}
-
-.sidenav {
-  width: 200px;
-}
+@use 'sass:map';
+@use '~@angular/material' as mat;
 
 .sidenav .mat-toolbar {
-  background: inherit;
-  
-}
-
-.mat-toolbar.mat-primary {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  .topnav-spacer {
-    flex: 1 1 auto;
-  }
-  
+  background: inherit;  
 }
 
 .content-html {
     margin: 20px;
 }
+
+.flex-spacer {
+  flex-grow: 1;
+}
+
+.docs-angular-logo {
+  height: 26px;
+  margin: 0 4px 3px 0;
+  vertical-align: middle;
+}
+
+/**
+  * Rules for when the device is detected to be a small screen.
+  * Moves content two rows instead of one.
+  */
+  @media (max-width: 720px) {
+    .docs-navbar-hide-small {
+      display: none;
+    }
+  
+    .docs-navbar-show-small {
+      display: block;
+    }
+  
+    .docs-navbar {
+      display: flex;
+    }
+  
+    .docs-navbar--github-logo {
+      margin: 0;
+    }
+  }
+  
+  theme-picker {
+    display: none;
+  
+    @media (min-width: 328px) {
+      display: block;
+    }
+  }
+
+  @mixin theme($theme) {
+    $primary: map.get($theme, primary);
+    $accent: map.get($theme, accent);
+    $warn: map.get($theme, warn);
+    $background: map.get($theme, background);
+    $foreground: map.get($theme, foreground);
+  
+    mat-toobar.mat-primary {
+      color: mat.get-color-from-palette($primary, default-contrast);
+      background: mat.get-color-from-palette($primary);
+      & a:hover, & a:focus {
+          background: rgba(0, 0, 0, 0.4);
+          color: mat.get-color-from-palette($accent, 200);
+      }
+      .docs-navbar-header-item-selected {
+          background: rgba(0, 0, 0, 0.2);
+      }
+    }
+  }

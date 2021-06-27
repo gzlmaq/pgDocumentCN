@@ -14,6 +14,7 @@
 @use './app/shared/navbar/navbar-theme';
 @use './app/shared/table-of-contents/table-of-contents-theme'; 
 */
+//@use './app/app.component';
 @use './styles/api-theme';
 @use './styles/markdown-theme';
 @use './styles/svg-theme';
@@ -56,6 +57,8 @@
   .is-next-version {
     background: mat.get-color-from-palette($next-theme, 900) !important;
   }
+
+  
 
 }
 

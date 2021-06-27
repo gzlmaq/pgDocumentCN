@@ -105,7 +105,8 @@ export class ThemePicker implements OnInit, OnDestroy {
     if (theme.isDefault) {
       this.styleManager.removeStyle('theme');
     } else {
-      this.styleManager.setStyle('theme', `assets/${theme.name}.css`);
+      this.styleManager.setStyle('theme', `${theme.name}.css`);
+      //this.styleManager.setStyle('theme', `assets/${theme.name}.css`);
     }
 
     if (this.currentTheme) {
