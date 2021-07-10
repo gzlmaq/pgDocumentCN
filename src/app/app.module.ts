@@ -16,7 +16,7 @@ import { FeaturesComponent } from './features/features.component';
 import { ConnectingComponent } from './connecting/connecting.component';
 import { ThemePicker, ThemePickerModule } from './share/theme-picker';
 import { StyleManager } from './share/style-manager';
-import { LanguagePicker, LanguagePickerModule } from './share/language-picker';
+import { LanguagePickerModule } from './share/language-picker';
 
 
 @NgModule({
@@ -40,7 +40,7 @@ import { LanguagePicker, LanguagePickerModule } from './share/language-picker';
     ThemePickerModule,
     LanguagePickerModule
   ],
-  providers: [StyleManager, LanguagePicker],
+  providers: [StyleManager],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

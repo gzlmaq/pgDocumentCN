@@ -7,11 +7,11 @@ export interface LanguageInfo {
 
 @Injectable()
 export class LanguageStorage {
-  static storageKey = 'zh_CN';
+  static storageKey = 'language';
 
   onLanguageUpdate: EventEmitter<LanguageInfo> = new EventEmitter<LanguageInfo>();
 
-  storeTheme(language: LanguageInfo) {
+  storeLanguage(language: LanguageInfo) {
     try {
       window.localStorage[LanguageStorage.storageKey] = language.title;
     } catch { }
