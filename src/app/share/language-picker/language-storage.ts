@@ -1,21 +1,19 @@
 import {Injectable, EventEmitter} from '@angular/core';
 
 export interface LanguageInfo {
-  url: string;
+  localeId: string;
   title: string;
 }
 
 @Injectable()
 export class LanguageStorage {
-  static storageKey = 'language';
-
+  static storageKey = 'currentLanguage';
   onLanguageUpdate: EventEmitter<LanguageInfo> = new EventEmitter<LanguageInfo>();
 
   storeLanguage(language: LanguageInfo) {
     try {
-      window.localStorage[LanguageStorage.storageKey] = language.title;
+      window.localStorage[LanguageStorage.storageKey] = language.localeId;
     } catch { }
-
     this.onLanguageUpdate.emit(language);
   }
 
