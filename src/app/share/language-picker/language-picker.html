@@ -1,6 +1,6 @@
 <button mat-button [matMenuTriggerFor]="languagePicker" aria-label="Select a language"
         matTooltip="Select a language of the documentation">
-  {{currentLanguage}}
+  {{currentLanguage.title}}
   <mat-icon>arrow_drop_down</mat-icon>
 </button>
 <mat-menu #languagePicker="matMenu">

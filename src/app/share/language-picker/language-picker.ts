@@ -45,20 +45,19 @@ export class LanguagePicker {
     }
   ];
   
+  currentLanguage: LanguageInfo; 
  
   constructor(private location: Location, @Inject(LOCALE_ID) protected localeId: string, private http: HttpClient, private languageStorage: LanguageStorage) {
   }
 
-  currentLanguage: string = this.localeId;
-
   ngOnInit(){
     if(window.localStorage[LanguageStorage.storageKey]){
-      this.currentLanguage =window.localStorage[LanguageStorage.storageKey];
+      this.currentLanguage =this.languages.find(myObj=>myObj.localeId == this.languageStorage.getStoredLanguageName());
     }
   }
   
   onLanguageChanged(language: LanguageInfo) {
-    this.currentLanguage = language.localeId;
+    this.currentLanguage = language;
     this.languageStorage.storeLanguage(language);
     const path = location.pathname.split('/');
     path[1] = language.localeId;
